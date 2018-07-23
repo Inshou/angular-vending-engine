@@ -1,0 +1,17 @@
+table{
+    margin: 1rem;
+}
+table caption{
+    text-align: left;
+    font-weight: 800;
+    font-size: 1.2rem;
+    padding-bottom: 0.5rem;
+}
+table th{
+    text-align: left;
+    padding-right: 1rem;
+    padding: 0.2rem 0.5rem;
+}
+table td{
+    padding: 0.2rem 0.5rem;
+}

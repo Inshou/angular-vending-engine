@@ -1,0 +1,21 @@
+<h2>Vendors</h2>
+
+<ul class="vendors">
+  <li *ngFor="let vendor of vendors">
+    <a routerLink="/detail/{{vendor.id}}">
+      <span class="badge">{{vendor.id}}</span> {{vendor.name}}
+    </a>
+    <button class="delete" title="delete vendor"
+      (click)="delete(vendor)">x</button>
+  </li>
+</ul>
+
+<div>
+  <label>Vendor name:
+    <input #vendorName />
+  </label>
+  <!-- (click) passes input value to add() and then clears the input -->
+  <button (click)="add(vendorName.value); vendorName.value=''">
+    add
+  </button>
+</div>

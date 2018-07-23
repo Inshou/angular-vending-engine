@@ -1,0 +1,55 @@
+<div *ngIf="vendor">
+
+  <h2>{{vendor.name | uppercase}}</h2>
+  <div><span>id: </span>{{vendor.id}}</div>
+  <div>
+    <label>name:
+      <input [(ngModel)]="vendor.name" placeholder="name"/>
+    </label>
+    <table *ngIf="vendor.money.money" class="purse">
+      <caption>Purse</caption>
+      <tr *ngFor="let coins of vendor.money.money; let i = index" [attr.data-index]="i">
+        <th class="__title">{{ settings.coins[i].title }}: </th> 
+        <td class="__value">{{ coins }}</td>
+        <td class="__control"><button (click)="addCoin(i)">+</button>
+        <button (click)="removeCoin(i)">-</button></td>
+      </tr>
+    </table>
+
+    <table *ngIf="vendor.store" class="store">
+        <caption>
+          <h4>Products</h4>
+        </caption>
+        <tr>
+          <th>ID</th>
+          <th>Title</th>
+          <th>Cost</th>
+          <th>Quantity</th>
+        </tr>
+        <tr *ngFor="let product of vendor.store; let i = index;">
+            <th class="__id">{{ i }}</th>
+            <td class="__title">{{ vendor.store[i].title }}</td> 
+            <td class="__cost"><input [(ngModel)]="vendor.store[i].cost" placeholder="cost" /></td>
+            <td class="__quantity"><input [(ngModel)]="vendor.store[i].quantity" placeholder="quantity" /></td>
+            <td class="__control">
+                <button (click)="deleteProduct(i)">delete</button>
+            </td>
+        </tr>
+        <tr class="__addProduct">
+            <th class="__id">#</th>
+            <td class="__title"><input #productTitle placeholder="title" /></td> 
+            <td class="__cost"><input #productCost placeholder="cost" /></td>
+            <td class="__quantity"><input #productQuantity placeholder="quantity" /></td>
+            <td class="__control">
+              <button (click)="addProduct(productTitle.value, productCost.value, productQuantity.value); productTitle.value=''; productCost.value=''; productQuantity.value=''">
+                add
+              </button>
+            </td>
+        </tr>
+    </table>
+
+  </div>
+  <button (click)="goBack()">back</button>
+  <button (click)="save()">save</button>
+</div>
+

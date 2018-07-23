@@ -1,0 +1,49 @@
+<div class="vending-engine">
+  <div *ngIf="vendor">
+    <h3>Service {{vendor.name}}</h3>
+    <table>
+      <caption>Products:</caption>
+      <tr>
+        <th>Id</th>
+        <th>Title</th>
+        <th>Cost</th>
+        <th>Quantity</th>
+        <th></th>
+      </tr>
+      <tr *ngFor="let product of vendor.store; let i = index" [attr.data-index]="i">
+        <td>{{product.id}}</td>
+        <td>{{product.title}}</td> 
+        <td>{{product.cost}} rub</td> 
+        <td>{{product.quantity}}</td>
+        <td><button *ngIf="product.quantity" (click)="buyProduct(product.id)">buy</button></td>
+      </tr>
+    </table>
+    <h3>Deposite: {{ vendor.deposite }} rub</h3>
+    <table>
+      <caption>Vendor coins</caption>
+      <tr>
+        <th *ngFor="let coins of vendor.money.money; let i = index" [attr.data-index]="i">
+          {{ settings.coins[i].title }}
+        </th>
+      </tr>
+      <tr>
+        <td *ngFor="let coins of vendor.money.money; let i = index" [attr.data-index]="i">
+          {{ coins }}
+        </td>
+      </tr>
+    </table>
+    <button *ngIf="this.vendor.deposite" (click)="getMoneyBack()">get deposite</button>
+  </div>
+  <div *ngIf="customer">
+    <h3>Hello {{customer.name}}!</h3>
+    <table>
+      <caption>Your money:</caption>
+      <tr *ngFor="let coins of customer.money.money; let i = index" [attr.data-index]="i">
+          <th class="__title">{{ settings.coins[i].title }}: </th> 
+          <td class="__value">{{ coins }}</td>
+          <td class="__control"><button (click)="useCoin(i)">use</button></td>
+      </tr>
+    </table>
+  </div>
+</div>
+
