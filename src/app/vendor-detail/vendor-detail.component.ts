@@ -55,15 +55,19 @@ export class VendorDetailComponent implements OnInit {
   addProduct(title: string, cost: number, quantity: number): void {
 
     /* !!! Correct number input and checking on refactoring */
-    cost = Number.parseInt(cost);
-    quantity = Number.parseInt(quantity);
+    cost = Math.floor(cost);
+    quantity = Math.floor(quantity);
     /* !!! Correct number input and checking on refactoring */
 
     if (this.vendor.store.filter(x => x.title == title).length > 0) {
       this.messageService.add('Error: the product already exists');
+
+
     } else if (title && cost >= 0 && quantity >= 0) {
-      this.vendor.store.push({title: title, cost: cost, quantity: quantity} as Product);
+      let id = this.vendor.store.length + 1;
+      this.vendor.store.push({id: id, title: title, cost: cost, quantity: quantity} as Product);
       this.vendorService.updateVendor(this.vendor);
+
     } else if (!title) {
       this.messageService.add('Error: input title of the product');
     } else if (!Number.isFinite(cost) || cost < 0) {
