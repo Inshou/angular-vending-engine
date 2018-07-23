@@ -106,6 +106,7 @@ export class VendorService {
       vendor.money = result[0];
       customer.money = this.moneyService.sumMoney(customer.money, result[1]);
       vendor.deposite = 0;
+      this.log('Thank you! Your money was successfully added to your wallet');
     } 
     return [this.updateVendor(vendor), this.updateVendor(customer)];
   }
@@ -129,7 +130,7 @@ export class VendorService {
          productOut.quantity = 1;
          customer.store.push(productOut);
       }
-      this.log('Thank you, the product was successfully purchased.');
+      this.log('Thank you! The product was successfully purchased.');
     } else if (vendor.store[productIndex].quantity <= 0) {
       this.log('Error: this product has expired');
     } else if (vendor.store[productIndex].cost > vendor.deposite) {
